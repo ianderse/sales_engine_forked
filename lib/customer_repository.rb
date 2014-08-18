@@ -5,7 +5,7 @@ class CustomerRepository
   attr_reader :customers
 
   def initialize
-    data      = CSV.open("./data/invoices.csv", headers: true, header_converters: :symbol)
+    data       = CSV.open("./data/customers.csv", headers: true, header_converters: :symbol)
     @customers = data.collect {|row| Customer.new(row)}
   end
 
