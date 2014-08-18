@@ -1,12 +1,13 @@
 require 'csv'
+require_relative 'csv_handler'
 require_relative 'customer'
 
 class CustomerRepository
   attr_reader :customers
 
   def initialize
-    data       = CSV.open("./data/customers.csv", headers: true, header_converters: :symbol)
-    @customers = data.collect {|row| Customer.new(row)}
+    csv       = CsvHandler.new("./data/customers.csv")
+    @customers = csv.data.collect {|row| Customer.new(row)}
   end
 
   def all
