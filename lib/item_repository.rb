@@ -1,14 +1,15 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 require 'csv'
+require_relative '../lib/csv_handler'
 require_relative '../lib/item'
 
 class ItemRepository
 	attr_reader :items
 
 	def initialize
-		csv = CSV.open("./data/items.csv", headers: true, header_converters: :symbol)
-		@items = csv.collect {|row| Item.new(row)}
+		csv      = CsvHandler.new("./data/items.csv")
+		@items = csv.data.collect {|row| Item.new(row)}
 	end
 
 	def all

@@ -1,17 +1,13 @@
 require 'csv'
 require_relative "merchant"
+require_relative "../lib/csv_handler"
 
 class MerchantRepository
-	attr_reader :filepath, :merchants
+	attr_reader :merchants
 
-  def initialize(filepath="./data/merchants.csv")
-    @filepath = filepath
-    load
-  end
-
-  def load
-    data = CSV.open(filepath, headers: true, header_converters: :symbol)
-    @merchants = data.collect {|row| Merchant.new(row)}
+  def initialize
+    csv      = CsvHandler.new("./data/merchants.csv")
+    @merchants = csv.data.collect {|row| Merchant.new(row)}
   end
 
   def all
