@@ -44,4 +44,19 @@ class MerchantTest < Minitest::Test
 		assert_equal 565485, merchant.revenue
 	end
 
+	def test_it_can_get_total_revenue_with_stubs
+		invoice = Minitest::Mock.new
+		invoice_item = Minitest::Mock.new
+		invoice_item_2 = Minitest::Mock.new
+		invoice.expect :invoice_items, [ invoice_item, invoice_item_2 ]
+		invoice_item.expect :unit_price, "5"
+		invoice_item.expect :quantity, "1"
+		invoice_item_2.expect :unit_price, "10"
+		invoice_item_2.expect :quantity, "3"
+
+		merchant.stub :invoices, [ invoice ] do
+			assert_equal 35, merchant.revenue
+		end
+	end
+
 end
