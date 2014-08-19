@@ -7,7 +7,7 @@ class CustomerRepository
 
   def initialize(engine)
     csv       = CsvHandler.new("./data/customers.csv")
-    @customers = csv.data.collect {|row| Customer.new(row)}
+    @customers = csv.data.collect {|row| Customer.new(row, self)}
     @engine = engine
   end
 

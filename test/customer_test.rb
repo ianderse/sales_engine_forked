@@ -2,13 +2,16 @@ require 'csv'
 require_relative 'test_helper'
 require_relative '../lib/csv_handler'
 require_relative '../lib/customer'
+require_relative '../lib/sales_engine'
 
 class CustomerTest < Minitest::Test
   attr_reader :customers, :customer
 
   def setup
+    @engine = SalesEngine.new
+    @engine.startup
     csv        = CsvHandler.new("./data/customers.csv")
-    @customers = csv.data.collect {|row| Customer.new(row)}
+    @customers = csv.data.collect {|row| Customer.new(row, @engine.customer_repository)}
     @customer = customers.first
   end
 
@@ -33,7 +36,6 @@ class CustomerTest < Minitest::Test
   end
 
   def test_it_returns_all_associated_invoices
-    skip
-    assert_equal ??, customer .invoices
+    assert_equal 8, customer.invoices.size
   end
 end
