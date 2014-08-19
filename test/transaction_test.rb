@@ -2,13 +2,16 @@ require 'csv'
 require_relative 'test_helper'
 require_relative '../lib/transaction'
 require_relative '../lib/csv_handler'
+require_relative '../lib/sales_engine'
 
 class TransactionTest < Minitest::Test
   attr_reader :sample
 
   def setup
+    @engine = SalesEngine.new
+    @engine.startup
     csv = CsvHandler.new("./data/transactions.csv")
-    @sample = csv.data.collect {|row| Transaction.new(row)}
+    @sample = csv.data.collect {|row| Transaction.new(row, @engine.transaction_repository)}
   end
 
   def test_it_returns_an_id
@@ -34,4 +37,10 @@ class TransactionTest < Minitest::Test
   def test_it_returns_an_updated_at_date
     assert_equal "2012-03-27 14:54:09 UTC", sample.first.updated_at
   end
+
+  def test_it_can_find_its_invoice
+    assert_equal "26", sample.first.invoice.merchant_id
+  end
+
+
 end

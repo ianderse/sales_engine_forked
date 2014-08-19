@@ -3,11 +3,12 @@ require_relative '../lib/csv_handler'
 require_relative '../lib/transaction'
 
 class TransactionRepository
-  attr_reader :transactions
+  attr_reader :transactions, :engine
 
-  def initialize
+  def initialize(engine)
+    @engine = engine
     csv      = CsvHandler.new("./data/transactions.csv")
-    @transactions = csv.data.collect {|row| Transaction.new(row)}
+    @transactions = csv.data.collect {|row| Transaction.new(row, self)}
   end
 
   def all
