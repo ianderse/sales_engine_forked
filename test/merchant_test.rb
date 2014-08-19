@@ -36,4 +36,8 @@ class MerchantTest < Minitest::Test
 		assert_equal 15, merchant.items.size
 	end
 
+	def test_it_knows_what_invoices_are_associated_with_it
+		assert_equal 59, merchant.invoices.size
+	end
+
 end

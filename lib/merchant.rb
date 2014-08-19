@@ -15,4 +15,8 @@ class Merchant
     @repo.engine.item_repository.find_all_by_merchant_id(self.id)
   end
 
+  def invoices
+    @repo.engine.invoice_repository.find_all_by_merchant_id(self.id)
+  end
+
 end
