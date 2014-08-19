@@ -22,6 +22,10 @@ class CustomerRepository
     customers.detect {|customer| customer.send(type.downcase.to_sym) == query}
   end
 
+  def find_by_first_name
+    
+  end
+
   def find_all_by(type, query)
     customers.select {|customer| customer.send(type.downcase.to_sym) == query}
   end
