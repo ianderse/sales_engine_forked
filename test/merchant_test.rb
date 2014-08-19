@@ -40,4 +40,8 @@ class MerchantTest < Minitest::Test
 		assert_equal 59, merchant.invoices.size
 	end
 
+	def test_it_can_get_total_revenue
+		assert_equal 565485, merchant.revenue
+	end
+
 end

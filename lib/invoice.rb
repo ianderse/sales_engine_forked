@@ -23,8 +23,7 @@ class Invoice
 
   def items
     #need to look more at this, maybe it's working?
-    invoice_item_collection = invoice_items
-    invoice_item_collection.select do |invoice_item|
+    invoice_items.collect do |invoice_item|
       invoice_item.item
     end
   end

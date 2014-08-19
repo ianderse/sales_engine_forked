@@ -19,4 +19,15 @@ class Merchant
     @repo.engine.invoice_repository.find_all_by_merchant_id(self.id)
   end
 
+  def revenue
+    total = 0
+    invoices.each do |invoice|
+      invoice.invoice_items.each do |item|
+        total += item.quantity.to_i * item.unit_price.to_i
+      end
+    end
+    total
+    #unit price * quantity of invoice item
+  end
+
 end
