@@ -37,4 +37,9 @@ class ItemTest < Minitest::Test
 	def test_it_can_find_related_invoice_items
 		assert_equal 24, sample.first.invoice_items.size
 	end
+
+	def test_it_can_find_related_merchants
+		assert_equal "schroeder-jerde", sample.first.merchant.name
+	end
+
 end
