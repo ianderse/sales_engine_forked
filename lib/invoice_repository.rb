@@ -4,9 +4,9 @@ require_relative '../lib/csv_handler'
 
 class InvoiceRepository
 	attr_reader :invoices
-	
+
 	def initialize
-		csv      = CsvHandler.new("./data/invoices.csv")
+		csv       = CsvHandler.new("./data/invoices.csv")
 		@invoices = csv.data.collect {|row| Invoice.new(row)}
 	end
 
@@ -36,7 +36,7 @@ class InvoiceRepository
 
 	def find_by_created_at(created_at)
 		invoices.detect {|invoice| invoice.created_at == created_at}
-	end	
+	end
 
 	def find_all_by_id(id)
 		invoices.select {|invoice| invoice.id == id}
