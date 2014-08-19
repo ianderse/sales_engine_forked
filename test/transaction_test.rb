@@ -42,5 +42,4 @@ class TransactionTest < Minitest::Test
     assert_equal "26", sample.first.invoice.merchant_id
   end
 
-
 end
