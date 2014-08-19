@@ -18,17 +18,17 @@ class MerchantRepositoryTest < Minitest::Test
 	end
 
 	def test_it_finds_by_name
-		results = merchant_repository.find_by("name", "Bechtelar LLC")
+		results = merchant_repository.find_by_name("Bechtelar LLC")
 		assert_equal "bechtelar llc", results.name
 	end
 
 	def test_it_finds_by_id
-		results = merchant_repository.find_by("id", "66")
+		results = merchant_repository.find_by_id("66")
 		assert_equal "66", results.id
 	end
 
-	def test_it_finds_all_by
-	  result = merchant_repository.find_all_by("name", "williamson group")
+	def test_it_finds_all_by_name
+	  result = merchant_repository.find_all_by_name("Williamson group")
 	  assert_equal 2, result.count
 	end
 end	

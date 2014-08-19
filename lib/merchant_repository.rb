@@ -18,12 +18,24 @@ class MerchantRepository
   	merchants.sample
   end
 
-  def find_by(type, query)
-  	  merchants.detect {|merchant| merchant.send(type.downcase.to_sym) == query.downcase}
+  def find_by_id(id)
+    merchants.detect {|merchant| merchant.id == id}
   end
 
-  def find_all_by(type, query)
-  	merchants.select {|merchant| merchant.send(type.downcase.to_sym) == query.downcase}
+  def find_by_name(name)
+    merchants.detect {|merchant| merchant.name == name.downcase}
+  end
+
+  def find_by_created_at(created_at)
+    merchants.detect {|merchant| merchant.created_at == created_at}
+  end
+
+  def find_all_by_name(name)
+    merchants.select {|merchant| merchant.name == name.downcase}
+  end
+
+  def find_all_by_created_at(created_at)
+    merchants.select {|merchant| merchant.created_at == created_at}
   end
 
   def items
