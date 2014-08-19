@@ -38,7 +38,4 @@ class MerchantRepository
     merchants.select {|merchant| merchant.created_at == created_at}
   end
 
-  def items
-  	
-  end
 end
