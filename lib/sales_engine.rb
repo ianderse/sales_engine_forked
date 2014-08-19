@@ -17,7 +17,7 @@ class SalesEngine
 
   def startup
     @merchant_repository = MerchantRepository.new(self)
-    @invoice_repository  = InvoiceRepository.new
+    @invoice_repository  = InvoiceRepository.new(self)
     @item_repository     = ItemRepository.new
     @invoice_item_repository = InvoiceItemRepository.new
     @customer_repository = CustomerRepository.new
