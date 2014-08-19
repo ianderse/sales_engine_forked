@@ -5,11 +5,12 @@ require_relative '../lib/csv_handler'
 #should we have find by merchant id for this?
 
 class InvoiceItemRepository
-  attr_reader :invoice_items
+  attr_reader :invoice_items, :engine
 
-  def initialize
+  def initialize(engine)
     csv       = CsvHandler.new("./data/invoice_items.csv")
     @invoice_items = csv.data.collect {|row| InvoiceItem.new(row)}
+    @engine = engine
   end
 
   def all
