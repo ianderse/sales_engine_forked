@@ -8,9 +8,9 @@ class InvoiceItemRepository
   attr_reader :invoice_items, :engine
 
   def initialize(engine)
-    csv       = CsvHandler.new("./data/invoice_items.csv")
-    @invoice_items = csv.data.collect {|row| InvoiceItem.new(row)}
     @engine = engine
+    csv       = CsvHandler.new("./data/invoice_items.csv")
+    @invoice_items = csv.data.collect {|row| InvoiceItem.new(row, @engine)}
   end
 
   def all

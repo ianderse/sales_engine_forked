@@ -41,4 +41,12 @@ class InvoiceTest < Minitest::Test
 	def test_it_knows_associated_transactions
 		assert_equal 1, invoices.first.transactions.size
 	end
+
+	def test_it_knows_associated_invoice_items
+		assert_equal 8, invoices.first.invoice_items.size
+	end
+
+	def test_it_knows_associated_customer_with_self
+		assert_equal "Joey", invoices.first.customer.first_name
+	end
 end
