@@ -18,15 +18,35 @@ class CustomerRepository
     customers.sample
   end
 
-  def find_by(type, query)
-    customers.detect {|customer| customer.send(type.downcase.to_sym) == query}
+  def find_by_first_name(first_name)
+    customers.detect {|customer| customer.first_name == first_name} 
   end
 
-  def find_by_first_name
-    
+  def find_by_last_name(last_name)
+    customers.detect {|customer| customer.last_name == last_name} 
   end
 
-  def find_all_by(type, query)
-    customers.select {|customer| customer.send(type.downcase.to_sym) == query}
+  def find_by_id(id)
+    customers.detect {|customer| customer.id == id.to_s} 
+  end
+
+  def find_by_created_at(created_at)
+    customers.detect {|customer| customer.created_at == created_at} 
+  end
+
+  def find_all_by_first_name(first_name)
+    customers.select {|customer| customer.first_name == first_name}    
+  end
+
+  def find_all_by_last_name(last_name)
+    customers.select {|customer| customer.last_name == last_name}    
+  end
+
+  def find_all_by_id(id)
+    customers.select {|customer| customer.id == id.to_s} 
+  end
+
+  def find_all_by_created_at(created_at)
+    customers.select {|customer| customer.created_at == created_at} 
   end
 end

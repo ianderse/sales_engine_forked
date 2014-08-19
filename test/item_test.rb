@@ -1,13 +1,14 @@
 require 'csv'
 require_relative 'test_helper'
 require_relative '../lib/item'
+require_relative '../lib/csv_handler'
 
 class ItemTest < Minitest::Test
 	attr_reader :sample
 	
 	def setup
-	  data = CSV.open("./data/item_test.csv", headers: true, header_converters: :symbol)
-	  @sample = data.collect {|row| Item.new(row)}
+	  csv = CsvHandler.new("./data/items.csv")
+	  @sample = csv.data.collect {|row| Item.new(row)}
 	end
 
 	def test_it_returns_a_name

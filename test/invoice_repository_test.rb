@@ -17,42 +17,42 @@ class InvoiceRepositoryTest < Minitest::Test
 	end
 
 	def test_it_finds_by_id
-		results = repository.find_by("id", "1")
+		results = repository.find_by_id("1")
 		assert_equal "26", results.merchant_id
 	end
 
 	def test_it_finds_by_customer_id
-		results = repository.find_by("customer_id", "3")
+		results = repository.find_by_customer_id("3")
 		assert_equal "10", results.id 
 	end
 
 	def test_it_finds_by_merchant_id
-		results = repository.find_by("merchant_id", "43")
+		results = repository.find_by_merchant_id("43")
 		assert_equal "9", results.customer_id
 	end
 
 	def test_it_finds_by_status
-		results = repository.find_by("status", "shipped")
+		results = repository.find_by_status("shipped")
 		assert_equal "26", results.merchant_id
 	end
 
 	def test_it_finds_by_created_at
-		results = repository.find_by("created_at", "2012-03-06 21:54:10 UTC")
+		results = repository.find_by_created_at("2012-03-06 21:54:10 UTC")
 		assert_equal "86", results.merchant_id
 	end
 
 	def test_it_finds_all_by_customer_id
-	  results = repository.find_all_by("customer_id", "10")
+	  results = repository.find_all_by_customer_id("10")
 	  assert_equal 8, results.count
 	end
 
 	def test_it_finds_all_by_merchant_id
-		results = repository.find_all_by("merchant_id", "33")
+		results = repository.find_all_by_merchant_id("33")
 		assert_equal 55, results.count
 	end
 
 	def test_it_finds_all_by_status
-		results = repository.find_all_by("status", "shipped")
+		results = repository.find_all_by_status("shipped")
 		assert_equal 4843, results.count
 	end
 end
