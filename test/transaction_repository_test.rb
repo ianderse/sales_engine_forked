@@ -1,11 +1,12 @@
 require_relative 'test_helper'
 require_relative '../lib/transaction_repository'
+require_relative '../lib/sales_engine'
 
 class TransactionRepositoryTest < Minitest::Test
   attr_reader :transactions
 
   def setup
-    @transactions = TransactionRepository.new
+    @transactions = TransactionRepository.new(SalesEngine.new)
   end
 
   def test_it_returns_all_items
@@ -42,17 +43,17 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 1, results.size
   end
 
-  def test_it_finds_by_credit_card_expiration
-    skip
-    results = transactions.find_by_credit_card_expiration("05/06")
-    assert_equal nil, results.id
-  end
-
-  def test_it_finds_all_by_credit_card_expiration
-    skip
-    results = transactions.find_all_by_credit_card_expiration("05/06")
-    assert_equal 0, results.size
-  end
+  # def test_it_finds_by_credit_card_expiration
+  #   skip
+  #   results = transactions.find_by_credit_card_expiration("05/06")
+  #   assert_equal nil, results.id
+  # end
+  #
+  # def test_it_finds_all_by_credit_card_expiration
+  #   skip
+  #   results = transactions.find_all_by_credit_card_expiration("05/06")
+  #   assert_equal 0, results.size
+  # end
 
   def test_it_finds_by_result
     results = transactions.find_by_result("failed")

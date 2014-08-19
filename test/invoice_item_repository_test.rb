@@ -1,11 +1,12 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice_item_repository'
+require_relative '../lib/sales_engine'
 
 class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository = InvoiceItemRepository.new
+    @repository = InvoiceItemRepository.new(SalesEngine.new)
   end
 
   def test_it_can_return_all

@@ -1,11 +1,12 @@
 require_relative 'test_helper'
 require_relative '../lib/customer_repository'
+require_relative '../lib/sales_engine'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customers
 
   def setup
-    @customers = CustomerRepository.new
+    @customers = CustomerRepository.new(SalesEngine.new)
   end
 
   def test_it_returns_all_items

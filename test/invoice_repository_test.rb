@@ -1,16 +1,17 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice_repository'
+require_relative '../lib/sales_engine'
 
 class InvoiceRepositoryTest < Minitest::Test
   attr_reader :repository
-	
+
 	def setup
-    @repository = InvoiceRepository.new
+    @repository = InvoiceRepository.new(SalesEngine.new)
 	end
 
 	def test_it_can_return_all
-	  assert_equal 4843, repository.all.count		
-	end	
+	  assert_equal 4843, repository.all.count
+	end
 
 	def test_it_can_return_a_random_instance
 	  assert_instance_of Invoice, repository.random
@@ -23,7 +24,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
 	def test_it_finds_by_customer_id
 		results = repository.find_by_customer_id("3")
-		assert_equal "10", results.id 
+		assert_equal "10", results.id
 	end
 
 	def test_it_finds_by_merchant_id

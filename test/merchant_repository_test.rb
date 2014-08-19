@@ -1,11 +1,12 @@
 require_relative 'test_helper'
 require_relative '../lib/merchant_repository'
+require_relative '../lib/sales_engine'
 
 class MerchantRepositoryTest < Minitest::Test
 	attr_reader :merchant_repository
 
 	def setup
-		@merchant_repository = MerchantRepository.new
+		@merchant_repository = MerchantRepository.new(SalesEngine.new)
 	end
 
 	def test_it_returns_all_instances_of_merchant
@@ -31,4 +32,4 @@ class MerchantRepositoryTest < Minitest::Test
 	  result = merchant_repository.find_all_by_name("Williamson group")
 	  assert_equal 2, result.count
 	end
-end	
+end
