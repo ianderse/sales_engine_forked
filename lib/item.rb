@@ -1,9 +1,9 @@
-require 'bigdecimal'  # => true
+require 'bigdecimal'
 
 class Item
-  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at  # => nil
+  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at, :repo
 
-  def initialize(row)
+  def initialize(row, repo)
     @id          = row[:id]
     @name        = row[:name]
     @description = row[:description]
@@ -11,7 +11,12 @@ class Item
     @merchant_id = row[:merchant_id]
     @created_at  = row[:created_at]
     @updated_at  = row[:updated_at]
+    @repo = repo
   end
 
   #validate data
+
+  def invoice_items
+    repo.engine.invoice_item_repository.find_all_by_item_id(self.id)
+  end
 end

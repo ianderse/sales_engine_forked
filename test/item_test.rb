@@ -2,13 +2,16 @@ require 'csv'
 require_relative 'test_helper'
 require_relative '../lib/item'
 require_relative '../lib/csv_handler'
+require_relative '../lib/sales_engine'
 
 class ItemTest < Minitest::Test
 	attr_reader :sample
-	
-	def setup
+
+  def setup
+		@engine = SalesEngine.new
+		@engine.startup
 	  csv = CsvHandler.new("./data/items.csv")
-	  @sample = csv.data.collect {|row| Item.new(row)}
+	  @sample = csv.data.collect {|row| Item.new(row, @engine.item_repository)}
 	end
 
 	def test_it_returns_a_name
@@ -29,5 +32,9 @@ class ItemTest < Minitest::Test
 
 	def test_it_returns_created_at
 		assert_equal "2012-03-27 14:53:59 UTC", sample.first.created_at
+	end
+
+	def test_it_can_find_related_invoice_items
+		assert_equal 24, sample.first.invoice_items.size
 	end
 end

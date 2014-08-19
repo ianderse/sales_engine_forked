@@ -5,11 +5,12 @@ require_relative '../lib/csv_handler'
 require_relative '../lib/item'
 
 class ItemRepository
-	attr_reader :items
+	attr_reader :items, :engine
 
-	def initialize
+	def initialize(engine)
+		@engine = engine
 		csv      = CsvHandler.new("./data/items.csv")
-		@items = csv.data.collect {|row| Item.new(row)}
+		@items = csv.data.collect {|row| Item.new(row, self)}
 	end
 
 	def all
@@ -49,7 +50,7 @@ class ItemRepository
 	end
 
 	def find_all_by_unit_price(unit_price)
-	  items.select {|item| item.unit_price == unit_price}	
+	  items.select {|item| item.unit_price == unit_price}
 	end
 
 	def find_all_by_merchant_id(merchant_id)
