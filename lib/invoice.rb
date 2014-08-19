@@ -27,6 +27,10 @@ class Invoice
   def customer
     @repo.engine.customer_repository.find_by_id(self.customer_id)
   end
-  
+
+  def merchant
+    @repo.engine.merchant_repository.find_by_id(self.merchant_id)
+  end
+
   #validate data
 end

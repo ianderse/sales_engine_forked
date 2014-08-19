@@ -49,4 +49,8 @@ class InvoiceTest < Minitest::Test
 	def test_it_knows_associated_customer_with_self
 		assert_equal "Joey", invoices.first.customer.first_name
 	end
+
+	def test_it_knows_associated_merchant_with_self
+		assert_equal "balistreri, schaefer and kshlerin", invoices.first.merchant.name
+	end
 end
