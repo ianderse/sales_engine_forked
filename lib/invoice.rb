@@ -1,7 +1,8 @@
 require 'csv'
 
 class Invoice
-  attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at
+
+ attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at
  def initialize(row, repo)
  	  @id          = row[:id]
  	  @customer_id = row[:customer_id]
@@ -21,7 +22,11 @@ class Invoice
   end
 
   def items
-
+    #need to look more at this, maybe it's working?
+    invoice_item_collection = invoice_items
+    invoice_item_collection.select do |invoice_item|
+      invoice_item.item
+    end
   end
 
   def customer

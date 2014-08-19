@@ -10,7 +10,7 @@ class InvoiceItemRepository
   def initialize(engine)
     @engine = engine
     csv       = CsvHandler.new("./data/invoice_items.csv")
-    @invoice_items = csv.data.collect {|row| InvoiceItem.new(row, @engine)}
+    @invoice_items = csv.data.collect {|row| InvoiceItem.new(row, self)}
   end
 
   def all
