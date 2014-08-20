@@ -77,7 +77,7 @@ class Merchant
 
     invoices.each do |invoice|
       if DateHandler.new(invoice.created_at).date == date || DateHandler.new(invoice.updated_at).date == date
-        invoices_on_date <<invoice
+        invoices_on_date << invoice
       end
     end
 
