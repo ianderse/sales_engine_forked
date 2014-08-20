@@ -40,8 +40,21 @@ class MerchantTest < Minitest::Test
 		assert_equal 59, merchant.invoices.size
 	end
 
+	def test_it_can_get_revenue_for_a_specific_date
+		assert_equal 17694, merchant.revenue("2012-03-27")
+	end
+
 	def test_it_can_get_total_revenue
 		assert_equal 565485, merchant.revenue
+	end
+
+	def test_it_can_return_its_favorite_customer
+		skip
+		assert_equal 1, merchant.favorite_customer.id
+	end
+
+	def test_it_can_return_customers_with_pending_invoices
+		assert_equal 19, merchant.customers_with_pending_invoices.size
 	end
 
 	def test_it_can_get_total_revenue_with_stubs

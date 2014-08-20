@@ -1,3 +1,5 @@
+require_relative 'date_handler'
+
 class Merchant
   attr_reader :id, :name, :created_at, :updated_at, :repo
 
@@ -19,14 +21,72 @@ class Merchant
     repo.find_invoices_by_merchant_id(self.id)
   end
 
-  def revenue
-    total = 0
+  def favorite_customer
+   # success_customers = []
+
+   # invoices.each do |invoice|
+   #  invoice.transactions.each do |transaction|
+   #    if transaction.result == "success"
+   #      success_customers << transaction.invoice.customer
+   #    end
+   #  end
+  end
+
+  def customers_with_pending_invoices
+    #refactor this shiz
+    failed_customers = []
+
     invoices.each do |invoice|
-      invoice.invoice_items.each do |item|
-        total += item.quantity.to_i * item.unit_price.to_i
+      invoice.transactions.each do |transaction|
+        if transaction.result == "failed"
+          failed_customers << transaction.invoice.customer
+        end
       end
     end
-    total
+    failed_customers
+  end
+
+  def revenue(date=nil)
+    if date.nil?
+      total_revenue
+    else
+      revenue_on_date(date)
+    end
+  end
+
+  def total_revenue
+    #need to check if invoice result is failed, if so do not include them in the calc.
+    total = 0
+      invoices.each do |invoice|
+        invoice.invoice_items.each do |item|
+          total += item.quantity.to_i * item.unit_price.to_i
+        end
+      end
+      total
+      #need to return as BigDecimal object
+  end
+
+  def revenue_on_date(date)
+    #need to check if invoice result is failed, if so do not include them in the calc.
+    #refactor the shit out of this and the previous method
+    invoices_on_date = []
+
+    invoices.each do |invoice|
+      if DateHandler.new(invoice.created_at).date == date || DateHandler.new(invoice.updated_at).date == date
+        invoices_on_date <<invoice
+      end
+    end
+
+    #puts invoices_on_date.last
+
+    total = 0
+    invoices_on_date.each do |invoice|
+      invoice.invoice_items.each do |item|
+            total += item.quantity.to_i * item.unit_price.to_i
+          end
+        end
+      total
+      #need to return as BigDecimal object
   end
 
 end
