@@ -45,7 +45,7 @@ class MerchantTest < Minitest::Test
 	end
 
 	def test_it_can_get_total_revenue
-		assert_equal "565485", merchant.revenue
+		assert_equal "528187", merchant.revenue
 	end
 
 	def test_it_can_return_its_favorite_customer
@@ -61,6 +61,9 @@ class MerchantTest < Minitest::Test
 		invoice = Minitest::Mock.new
 		invoice_item = Minitest::Mock.new
 		invoice_item_2 = Minitest::Mock.new
+		transaction = Minitest::Mock.new
+		invoice.expect :transactions, [ transaction ]
+		transaction.expect :result, "success"
 		invoice.expect :invoice_items, [ invoice_item, invoice_item_2 ]
 		invoice_item.expect :item_revenue, "5"
 		invoice_item_2.expect :item_revenue, "30"
