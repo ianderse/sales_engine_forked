@@ -35,9 +35,7 @@ class Invoice
     end
   end
 
-  def amount
-    invoice_items.map(&:item_revenue).inject(0, :+)
-  end
+
 
   #validate data
 end
