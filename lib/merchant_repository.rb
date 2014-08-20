@@ -40,4 +40,8 @@ class MerchantRepository
     merchants.select {|merchant| merchant.created_at == created_at}
   end
 
+  def find_items_by_merchant_id(id)
+    engine.find_items_by_merchant_id(id)
+  end
+
 end
