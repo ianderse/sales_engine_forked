@@ -22,21 +22,20 @@ class Merchant
   end
 
   def favorite_customer
-    # customers = invoices.map do |invoice|
-    #   invoice.customer
-    # end
+   # success_customers = []
 
-    # customers.each do |customer|
-
-    # end
-
-    # customers.sort_by {|customer|customer}
-
+   # invoices.each do |invoice|
+   #  invoice.transactions.each do |transaction|
+   #    if transaction.result == "success"
+   #      success_customers << transaction.invoice.customer
+   #    end
+   #  end
   end
 
   def customers_with_pending_invoices
     #refactor this shiz
     failed_customers = []
+
     invoices.each do |invoice|
       invoice.transactions.each do |transaction|
         if transaction.result == "failed"
@@ -56,6 +55,7 @@ class Merchant
   end
 
   def total_revenue
+    #need to check if invoice result is failed, if so do not include them in the calc.
     total = 0
       invoices.each do |invoice|
         invoice.invoice_items.each do |item|
@@ -63,9 +63,11 @@ class Merchant
         end
       end
       total
+      #need to return as BigDecimal object
   end
 
   def revenue_on_date(date)
+    #need to check if invoice result is failed, if so do not include them in the calc.
     #refactor the shit out of this and the previous method
     invoices_on_date = []
 
@@ -84,6 +86,7 @@ class Merchant
           end
         end
       total
+      #need to return as BigDecimal object
   end
 
 end
