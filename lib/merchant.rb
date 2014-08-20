@@ -82,10 +82,10 @@ class Merchant
     total = 0
     invoices_on_date.each do |invoice|
       invoice.invoice_items.each do |item|
-            total += item.quantity.to_i * item.unit_price.to_i
+            total += item.item_revenue.to_i
           end
         end
-      total
+      total.to_s
       #need to return as BigDecimal object
   end
 

@@ -41,11 +41,11 @@ class MerchantTest < Minitest::Test
 	end
 
 	def test_it_can_get_revenue_for_a_specific_date
-		assert_equal 17694, merchant.revenue("2012-03-27")
+		assert_equal "17694", merchant.revenue("2012-03-27")
 	end
 
 	def test_it_can_get_total_revenue
-		assert_equal 565485, merchant.revenue
+		assert_equal "565485", merchant.revenue
 	end
 
 	def test_it_can_return_its_favorite_customer
