@@ -19,4 +19,7 @@ class Customer
     invoices.find_all {|invoice| invoice.transactions}
   end
 
+  def favorite_merchant
+  end
+
 end

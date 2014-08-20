@@ -85,4 +85,8 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 2, results.size
   end
 
+  def test_it_returns_all_successful_transactions
+    assert_equal 4648, transactions.successful_transactions.count
+  end
+
 end

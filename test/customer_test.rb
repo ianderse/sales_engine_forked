@@ -42,4 +42,8 @@ class CustomerTest < Minitest::Test
   def test_it_returns_an_array_of_a_customers_tranactions
     assert_equal 8, customer.transactions.count
   end
+
+  def test_favorite_merchant_returns_merchant_with_most_successful_tranactions
+    assert_equal 11, customer.favorite_merchant
+  end
 end

@@ -19,6 +19,10 @@ class TransactionRepository
     transactions.sample
   end
 
+  def successful_transactions
+    transactions.find_all {|transaction| transaction.result == "success"}
+  end
+
   def find_by_id(id)
     transactions.detect {|transaction| transaction.id == id}
   end
