@@ -48,6 +48,11 @@ class MerchantTest < Minitest::Test
 		assert_equal 565485, merchant.revenue
 	end
 
+	def test_it_can_return_its_favorite_customer
+		skip
+		assert_equal 1, merchant.favorite_customer.id
+	end
+
 	def test_it_can_get_total_revenue_with_stubs
 		invoice = Minitest::Mock.new
 		invoice_item = Minitest::Mock.new

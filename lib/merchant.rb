@@ -21,6 +21,23 @@ class Merchant
     repo.find_invoices_by_merchant_id(self.id)
   end
 
+  def favorite_customer
+    # customers = invoices.map do |invoice|
+    #   invoice.customer
+    # end
+
+    # customers.each do |customer|
+
+    # end
+
+    # customers.sort_by {|customer|customer}
+
+  end
+
+  def customers_with_pending_invoices
+    #consider them pending if failed invoice payment?
+  end
+
   def revenue(date=nil)
     if date.nil?
       total_revenue
