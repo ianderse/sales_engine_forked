@@ -2,7 +2,7 @@ require 'csv'
 
 class Invoice
 
- attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at
+ attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at, :repo
  def initialize(row, repo)
  	  @id          = row[:id]
  	  @customer_id = row[:customer_id]
@@ -14,19 +14,19 @@ class Invoice
  	end
 
   def transactions
-    @repo.find_transactions_by_invoice_id(self.id)
+    repo.find_transactions_by_invoice_id(self.id)
   end
 
   def invoice_items
-    @repo.find_invoice_items_by_invoice_id(self.id)
+    repo.find_invoice_items_by_invoice_id(self.id)
   end
 
   def customer
-    @repo.find_customer_by_customer_id(self.customer_id)
+    repo.find_customer_by_customer_id(self.customer_id)
   end
 
   def merchant
-    @repo.find_merchant_by_merchant_id(self.merchant_id)
+    repo.find_merchant_by_merchant_id(self.merchant_id)
   end
 
   def items
