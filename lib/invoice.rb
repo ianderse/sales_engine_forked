@@ -30,7 +30,6 @@ class Invoice
   end
 
   def items
-    #need to look more at this, maybe it's working?
     invoice_items.collect do |invoice_item|
       invoice_item.item
     end

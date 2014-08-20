@@ -1,3 +1,5 @@
+require_relative 'date_handler'
+
 class Merchant
   attr_reader :id, :name, :created_at, :updated_at, :repo
 
@@ -19,14 +21,43 @@ class Merchant
     repo.find_invoices_by_merchant_id(self.id)
   end
 
-  def revenue
+  def revenue(date=nil)
+    if date.nil?
+      total_revenue
+    else
+      revenue_on_date(date)
+    end
+  end
+
+  def total_revenue
     total = 0
+      invoices.each do |invoice|
+        invoice.invoice_items.each do |item|
+          total += item.quantity.to_i * item.unit_price.to_i
+        end
+      end
+      total
+  end
+
+  def revenue_on_date(date)
+    #refactor the shit out of this and the previous method
+    invoices_on_date = []
+
     invoices.each do |invoice|
-      invoice.invoice_items.each do |item|
-        total += item.quantity.to_i * item.unit_price.to_i
+      if DateHandler.new(invoice.created_at).date == date || DateHandler.new(invoice.updated_at).date == date
+        invoices_on_date <<invoice
       end
     end
-    total
+
+    #puts invoices_on_date.last
+
+    total = 0
+    invoices_on_date.each do |invoice|
+      invoice.invoice_items.each do |item|
+            total += item.quantity.to_i * item.unit_price.to_i
+          end
+        end
+      total
   end
 
 end
