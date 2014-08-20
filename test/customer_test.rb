@@ -38,4 +38,8 @@ class CustomerTest < Minitest::Test
   def test_it_returns_all_associated_invoices
     assert_equal 8, customer.invoices.size
   end
+
+  def test_it_returns_an_array_of_a_customers_tranactions
+    assert_equal 8, customer.transactions.count
+  end
 end

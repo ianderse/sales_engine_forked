@@ -15,4 +15,8 @@ class Customer
   	repo.find_invoices_by_customer_id(self.id)
   end
 
+  def transactions
+    invoices.find_all {|invoice| invoice.transactions}
+  end
+
 end
