@@ -35,7 +35,16 @@ class Merchant
   end
 
   def customers_with_pending_invoices
-    #consider them pending if failed invoice payment?
+    #refactor this shiz
+    failed_customers = []
+    invoices.each do |invoice|
+      invoice.transactions.each do |transaction|
+        if transaction.result == "failed"
+          failed_customers << transaction.invoice.customer
+        end
+      end
+    end
+    failed_customers
   end
 
   def revenue(date=nil)

@@ -53,6 +53,10 @@ class MerchantTest < Minitest::Test
 		assert_equal 1, merchant.favorite_customer.id
 	end
 
+	def test_it_can_return_customers_with_pending_invoices
+		assert_equal 19, merchant.customers_with_pending_invoices.size
+	end
+
 	def test_it_can_get_total_revenue_with_stubs
 		invoice = Minitest::Mock.new
 		invoice_item = Minitest::Mock.new
