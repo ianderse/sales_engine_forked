@@ -58,8 +58,12 @@ class Merchant
     #need to check if invoice result is failed, if so do not include them in the calc.
     total = 0
       invoices.each do |invoice|
-        invoice.invoice_items.each do |item|
-          total += item.item_revenue.to_i
+        invoice.transactions.each do |transaction|
+          if transaction.result == "success"
+            invoice.invoice_items.each do |item|
+              total += item.item_revenue.to_i
+            end
+          end
         end
       end
       total.to_s
@@ -73,7 +77,7 @@ class Merchant
 
     invoices.each do |invoice|
       if DateHandler.new(invoice.created_at).date == date || DateHandler.new(invoice.updated_at).date == date
-        invoices_on_date <<invoice
+        invoices_on_date << invoice
       end
     end
 
@@ -81,11 +85,15 @@ class Merchant
 
     total = 0
     invoices_on_date.each do |invoice|
-      invoice.invoice_items.each do |item|
-            total += item.quantity.to_i * item.unit_price.to_i
+      invoice.transactions.each do |transaction|
+          if transaction.result == "success"
+            invoice.invoice_items.each do |item|
+              total += item.item_revenue.to_i
+            end
           end
         end
-      total
+      end
+      total.to_s
       #need to return as BigDecimal object
   end
 

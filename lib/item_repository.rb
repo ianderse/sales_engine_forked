@@ -68,4 +68,12 @@ class ItemRepository
   def find_merchant_by_merchant_id(id)
   	engine.find_merchant_by_merchant_id(id)
   end
+
+  def find_most_revenue(item_id)
+  	#returns the top item_id item instances ranked by total revenue generated
+  end
+
+  def find_most_items(item_id)
+  	#returns the top item_id item instances ranked by total number sold
+  end
 end
