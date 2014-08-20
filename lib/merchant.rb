@@ -16,7 +16,7 @@ class Merchant
   end
 
   def invoices
-    repo.engine.invoice_repository.find_all_by_merchant_id(self.id)
+    repo.find_invoices_by_merchant_id(self.id)
   end
 
   def revenue
@@ -30,3 +30,4 @@ class Merchant
   end
 
 end
+
