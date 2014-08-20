@@ -23,6 +23,6 @@ class InvoiceItem
   end
 
   def item_revenue
-    BigDecimal.new(self.quantity * self.unit_price)
+    BigDecimal.new(self.quantity.to_i * self.unit_price.to_i)
   end
 end

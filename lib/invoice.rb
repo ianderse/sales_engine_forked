@@ -35,7 +35,5 @@ class Invoice
     end
   end
 
-
-
   #validate data
 end
