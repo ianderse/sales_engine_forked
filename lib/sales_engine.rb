@@ -48,6 +48,10 @@ class SalesEngine
     invoice_item_repository.find_all_by_invoice_id(id)
   end
 
+  def find_invoice_items_by_item_id(id)
+    invoice_item_repository.find_all_by_item_id(id)
+  end
+
   def find_item_by_item_id(id)
     item_repository.find_by_id(id)
   end

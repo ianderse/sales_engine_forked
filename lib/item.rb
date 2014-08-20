@@ -17,11 +17,11 @@ class Item
   #validate data
 
   def invoice_items
-    repo.engine.invoice_item_repository.find_all_by_item_id(self.id)
+    repo.find_invoice_items_by_item_id(self.id)
   end
 
   def merchant
-    repo.engine.merchant_repository.find_by_id(self.merchant_id)
+    repo.find_merchant_by_merchant_id(self.merchant_id)
   end
-  
+
 end
