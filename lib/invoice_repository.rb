@@ -58,5 +58,21 @@ class InvoiceRepository
 	def find_all_by_created_at(created_at)
 		invoices.select {|invoice| invoice.created_at == created_at}
 	end
-	
+
+	def find_transactions_by_invoice_id(id)
+		engine.find_transactions_by_invoice_id(id)
+	end
+
+	def find_invoice_items_by_invoice_id(id)
+		engine.find_invoice_items_by_invoice_id(id)
+	end
+
+	def find_customer_by_customer_id(id)
+		engine.find_customer_by_customer_id(id)
+	end
+
+	def find_merchant_by_merchant_id(id)
+    engine.find_merchant_by_merchant_id(id)
+  end
+
 end

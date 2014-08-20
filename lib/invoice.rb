@@ -14,11 +14,19 @@ class Invoice
  	end
 
   def transactions
-    @repo.engine.transaction_repository.find_all_by_invoice_id(self.id)
+    @repo.find_transactions_by_invoice_id(self.id)
   end
 
   def invoice_items
-    @repo.engine.invoice_item_repository.find_all_by_invoice_id(self.id)
+    @repo.find_invoice_items_by_invoice_id(self.id)
+  end
+
+  def customer
+    @repo.find_customer_by_customer_id(self.customer_id)
+  end
+
+  def merchant
+    @repo.find_merchant_by_merchant_id(self.merchant_id)
   end
 
   def items
@@ -26,14 +34,6 @@ class Invoice
     invoice_items.collect do |invoice_item|
       invoice_item.item
     end
-  end
-
-  def customer
-    @repo.engine.customer_repository.find_by_id(self.customer_id)
-  end
-
-  def merchant
-    @repo.engine.merchant_repository.find_by_id(self.merchant_id)
   end
 
   #validate data
