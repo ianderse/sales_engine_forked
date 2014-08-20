@@ -1,7 +1,8 @@
-require 'bigdecimal'
+require 'bigdecimal'  # => true
+require_relative 'date_handler'
 
 class Item
-  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at, :repo
+  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at, :repo  # => nil
 
   def initialize(row, repo)
     @id          = row[:id]
@@ -24,4 +25,18 @@ class Item
     repo.find_merchant_by_merchant_id(self.merchant_id)
   end
 
+  def best_day
+    invoices = invoice_items.select {|invoice_item| invoice_item.invoice}
+    
+    best_invoice = invoices.max_by do |invoice|
+      invoices.each do |i|
+        if invoice.id == i.id
+          invoice.item_revenue + i.item_revenue
+        else
+          invoice.item_revenue
+        end
+      end
+    end
+    DateHandler.new(best_invoice.created_at).date
+  end
 end

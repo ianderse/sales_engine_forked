@@ -21,4 +21,8 @@ class InvoiceItem
   def item
     repo.find_item_by_item_id(self.item_id)
   end
+
+  def item_revenue
+    BigDecimal.new(self.quantity * self.unit_price)
+  end
 end

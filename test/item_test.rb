@@ -42,4 +42,8 @@ class ItemTest < Minitest::Test
 		assert_equal "schroeder-jerde", sample.first.merchant.name
 	end
 
+	def test_it_returns_an_items_best_day
+		assert_equal "2012-03-27", sample.first.best_day
+	end
+
 end
