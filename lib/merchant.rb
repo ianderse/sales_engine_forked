@@ -1,5 +1,5 @@
 class Merchant
-  attr_reader :id, :name, :created_at, :updated_at
+  attr_reader :id, :name, :created_at, :updated_at, :repo
 
   def initialize(row, repo)
     @id          = row[:id]
@@ -12,11 +12,11 @@ class Merchant
   #validate data
 
   def items
-    @repo.engine.item_repository.find_all_by_merchant_id(self.id)
+    repo.engine.item_repository.find_all_by_merchant_id(self.id)
   end
 
   def invoices
-    @repo.engine.invoice_repository.find_all_by_merchant_id(self.id)
+    repo.engine.invoice_repository.find_all_by_merchant_id(self.id)
   end
 
   def revenue
@@ -27,7 +27,6 @@ class Merchant
       end
     end
     total
-    #unit price * quantity of invoice item
   end
 
 end
