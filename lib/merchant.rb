@@ -26,7 +26,7 @@ class Merchant
 
     invoices.each do |invoice|
       invoice.transactions.each do |transaction|
-        if transaction.result == "success"
+        if transaction.successful_transaction?
           successful_customers << transaction.invoice.customer
         end
       end
@@ -38,14 +38,14 @@ class Merchant
     customer_names = []
     successful_customers.group_by {|customer| customer.first_name}.values.max_by(&:size).first
   end
-    
+
   def customers_with_pending_invoices
     #refactor this shiz
     failed_customers = []
 
     invoices.each do |invoice|
       invoice.transactions.each do |transaction|
-        if transaction.result == "failed"
+        if !transaction.successful_transaction?
           failed_customers << transaction.invoice.customer
         end
       end
@@ -66,7 +66,7 @@ class Merchant
     total = 0
       invoices.each do |invoice|
         invoice.transactions.each do |transaction|
-          if transaction.result == "success"
+          if transaction.successful_transaction?
             invoice.invoice_items.each do |item|
               total += item.item_revenue.to_i
             end
@@ -93,7 +93,7 @@ class Merchant
     total = 0
     invoices_on_date.each do |invoice|
       invoice.transactions.each do |transaction|
-          if transaction.result == "success"
+          if transaction.successful_transaction?
             invoice.invoice_items.each do |item|
               total += item.item_revenue.to_i
             end
