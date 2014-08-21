@@ -6,7 +6,7 @@ class MerchantTest < Minitest::Test
 	attr_reader :merchant
 
 	def setup
-		row = {:id => "1", :name => "Schroeder-Jerde", :created_at => "2012-03-27 14:53:59 UTC", :updated_at => "2012-03-27 14:53:59 UTC"}
+		row = {:id => "1", :name => "schroeder-Jerde", :created_at => "2012-03-27 14:53:59 UTC", :updated_at => "2012-03-27 14:53:59 UTC"}
 		@engine = SalesEngine.new
 		@engine.startup
 		@merchant = Merchant.new(row, @engine.merchant_repository)
@@ -48,13 +48,12 @@ class MerchantTest < Minitest::Test
 		assert_equal "528187", merchant.revenue
 	end
 
-	def test_it_can_return_its_favorite_customer
-		skip
-		assert_equal 1, merchant.favorite_customer.id
-	end
-
 	def test_it_can_return_customers_with_pending_invoices
 		assert_equal 19, merchant.customers_with_pending_invoices.size
+	end
+
+		def test_it_can_return_its_favorite_customer
+		assert_equal 1, merchant.favorite_customer.first_name
 	end
 
 	def test_it_can_get_total_revenue_with_stubs
@@ -63,7 +62,7 @@ class MerchantTest < Minitest::Test
 		invoice_item_2 = Minitest::Mock.new
 		transaction = Minitest::Mock.new
 		invoice.expect :transactions, [ transaction ]
-		transaction.expect :successful_transaction?, "success"
+		transaction.expect :result, "success"
 		invoice.expect :invoice_items, [ invoice_item, invoice_item_2 ]
 		invoice_item.expect :item_revenue, "5"
 		invoice_item_2.expect :item_revenue, "30"

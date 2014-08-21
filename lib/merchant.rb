@@ -22,20 +22,23 @@ class Merchant
   end
 
   def favorite_customer
-   # customer.transactions.each do |transaction|
-   #    each transaction, see if it's successful
-   #    if so, update counter for each successful transaction
-   #    compare counters for each customer
-   # success_customers = []
+   successful_customers = []
 
-   # invoices.each do |invoice|
-   #  invoice.transactions.each do |transaction|
-   #    if transaction.result == "success"
-   #      success_customers << transaction.invoice.customer
-   #    end
-   #  end
+    invoices.each do |invoice|
+      invoice.transactions.each do |transaction|
+        if transaction.result == "success"
+          successful_customers << transaction.invoice.customer
+        end
+      end
+    end
+    successful_customer_sort(successful_customers)
   end
 
+  def successful_customer_sort(successful_customers)
+    customer_names = []
+    successful_customers.group_by {|customer| customer.first_name}.values.max_by(&:size).first
+  end
+    
   def customers_with_pending_invoices
     #refactor this shiz
     failed_customers = []
@@ -63,7 +66,7 @@ class Merchant
     total = 0
       invoices.each do |invoice|
         invoice.transactions.each do |transaction|
-          if transaction.successful_transaction?
+          if transaction.result == "success"
             invoice.invoice_items.each do |item|
               total += item.item_revenue.to_i
             end
@@ -75,6 +78,7 @@ class Merchant
   end
 
   def revenue_on_date(date)
+    #need to check if invoice result is failed, if so do not include them in the calc.
     #refactor the shit out of this and the previous method
     invoices_on_date = []
 
@@ -89,7 +93,7 @@ class Merchant
     total = 0
     invoices_on_date.each do |invoice|
       invoice.transactions.each do |transaction|
-          if transaction.successful_transaction?
+          if transaction.result == "success"
             invoice.invoice_items.each do |item|
               total += item.item_revenue.to_i
             end
