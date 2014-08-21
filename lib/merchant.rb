@@ -59,7 +59,7 @@ class Merchant
     total = 0
       invoices.each do |invoice|
         invoice.transactions.each do |transaction|
-          if transaction.result == "success"
+          if transaction.successful_transaction?
             invoice.invoice_items.each do |item|
               total += item.item_revenue.to_i
             end
@@ -86,7 +86,7 @@ class Merchant
     total = 0
     invoices_on_date.each do |invoice|
       invoice.transactions.each do |transaction|
-          if transaction.result == "success"
+          if transaction.successful_transaction?
             invoice.invoice_items.each do |item|
               total += item.item_revenue.to_i
             end

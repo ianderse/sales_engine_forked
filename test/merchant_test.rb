@@ -63,7 +63,7 @@ class MerchantTest < Minitest::Test
 		invoice_item_2 = Minitest::Mock.new
 		transaction = Minitest::Mock.new
 		invoice.expect :transactions, [ transaction ]
-		transaction.expect :result, "success"
+		transaction.expect :successful_transaction?, "success"
 		invoice.expect :invoice_items, [ invoice_item, invoice_item_2 ]
 		invoice_item.expect :item_revenue, "5"
 		invoice_item_2.expect :item_revenue, "30"
