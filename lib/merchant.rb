@@ -22,6 +22,10 @@ class Merchant
   end
 
   def favorite_customer
+   # customer.transactions.each do |transaction|
+   #    each transaction, see if it's successful
+   #    if so, update counter for each successful transaction
+   #    compare counters for each customer
    # success_customers = []
 
    # invoices.each do |invoice|
@@ -71,7 +75,6 @@ class Merchant
   end
 
   def revenue_on_date(date)
-    #need to check if invoice result is failed, if so do not include them in the calc.
     #refactor the shit out of this and the previous method
     invoices_on_date = []
 
